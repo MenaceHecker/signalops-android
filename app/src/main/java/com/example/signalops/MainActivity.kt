@@ -20,6 +20,3 @@ class MainActivity : ComponentActivity() {
             SignalOpsApp()
         }
     }
-
-    annotation class SignalOpsApp
-}
