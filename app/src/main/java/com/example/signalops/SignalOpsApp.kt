@@ -1,4 +1,11 @@
 package com.example.signalops
 
-class SignalOpsApp {
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+
+@Composable
+fun SignalOpsApp() {
+    MaterialTheme {
+        AppNavGraph()
+    }
 }
