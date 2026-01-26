@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.signalops.ui.auth.LoginScreen
+import com.example.signalops.ui.dashboard.Dashboard
 
 @Composable
 fun AppNavGraph() {
@@ -14,6 +16,6 @@ fun AppNavGraph() {
         startDestination = "login"
     ) {
         composable("login") { LoginScreen(navController) }
-        composable("dashboard") { DashboardScreen() }
+        composable("dashboard") { Dashboard() }
     }
 }
