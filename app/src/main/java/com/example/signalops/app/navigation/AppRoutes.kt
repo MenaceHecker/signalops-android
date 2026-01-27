@@ -1,4 +1,5 @@
 package com.example.signalops.app.navigation
 
-class AppRoutes {
+object AppRoutes {
+    const val HOME = "home"
 }
