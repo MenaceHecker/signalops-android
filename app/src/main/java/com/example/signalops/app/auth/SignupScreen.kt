@@ -14,5 +14,10 @@ fun SignupScreen(
     onSignupSuccess: () -> Unit,
 )
 {
-
+    Column(
+        modifier = Modifier.fillMaxSize().padding(24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+    }
 }
