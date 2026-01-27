@@ -17,4 +17,10 @@ fun LoginScreen(
     onNavigateToSignup: () -> Unit,
     onLoginSuccess: () -> Unit
 ) {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
+
+    // Later: hook to ViewModel + API
+    val isFormValid = email.isNotBlank() && password.length >= 6
 }
