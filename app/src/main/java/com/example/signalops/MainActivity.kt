@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.signalops.app.auth.AuthGraph
 import com.example.signalops.app.auth.authNavGraph
 import com.example.signalops.app.navigation.AppRoutes
+import com.example.signalops.app.navigation.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +40,7 @@ fun SignalOpsApp() {
         )
 
         composable(AppRoutes.HOME) {
-    //HomeScreen goes here
+        HomeScreen()
         }
     }
 }
