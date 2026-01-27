@@ -19,5 +19,19 @@ fun SignupScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Text("Signup", style = MaterialTheme.typography.headlineMedium)
+
+        Spacer(Modifier.height(16.dp))
+
+        Button(
+            onClick = onSignupSuccess,
+            modifier = Modifier.fillMaxWidth()
+        ) { Text("Create account") }
+
+        Spacer(Modifier.height(8.dp))
+
+        TextButton(onClick = onNavigateBack) {
+            Text("Back to login")
+        }
     }
 }
