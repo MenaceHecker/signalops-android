@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.signalops.ui.auth.LoginScreen
+import com.example.signalops.ui.auth.SignupScreen
 
 @Composable
 fun AuthNavGraph(
