@@ -2,35 +2,35 @@ package com.example.signalops.app.auth
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
+import androidx.navigation.navigation
 import androidx.navigation.compose.composable
+import androidx.navigation.NavGraphBuilder
 import com.example.signalops.ui.auth.LoginScreen
 import com.example.signalops.ui.auth.SignupScreen
 
-@Composable
-fun AuthNavGraph(
+// Putting a Nested graph route
+object AuthGraph {
+    const val ROUTE = "auth"
+}
+
+fun NavGraphBuilder.authNavGraph(
     navController: NavHostController,
-    startDestination: String = AuthRoutes.LOGIN,
-    onAuthSuccess: () -> Unit = {}
+    onAuthSuccess: () -> Unit,
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = startDestination
+    navigation(
+        startDestination = AuthRoutes.LOGIN,
+        route = AuthGraph.ROUTE
     ) {
         composable(AuthRoutes.LOGIN) {
             LoginScreen(
-                onNavigateToSignup = {
-                    navController.navigate(AuthRoutes.SIGNUP)
-                },
+                onNavigateToSignup = { navController.navigate(AuthRoutes.SIGNUP) },
                 onLoginSuccess = onAuthSuccess
             )
         }
 
         composable(AuthRoutes.SIGNUP) {
             SignupScreen(
-                onNavigateBack = {
-                    navController.popBackStack()
-                },
+                onNavigateBack = { navController.popBackStack() },
                 onSignupSuccess = onAuthSuccess
             )
         }
