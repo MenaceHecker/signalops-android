@@ -11,3 +11,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
+
+@Composable
+fun SignupScreen(
+    onNavigateBack: () -> Unit,
+    onSignupSuccess: () -> Unit
+) {
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
+
+    val isFormValid = name.isNotBlank() && email.isNotBlank() && password.length >= 6
+
+}
