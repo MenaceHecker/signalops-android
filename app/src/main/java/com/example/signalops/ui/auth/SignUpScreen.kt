@@ -13,7 +13,7 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SignupScreen(
+fun SignUpScreen(
     onNavigateBack: () -> Unit,
     onSignupSuccess: () -> Unit
 ) {
