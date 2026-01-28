@@ -5,7 +5,7 @@ import androidx.navigation.navigation
 import androidx.navigation.compose.composable
 import androidx.navigation.NavGraphBuilder
 import com.example.signalops.ui.auth.LoginScreen
-import com.example.signalops.ui.auth.SignupScreen
+import com.example.signalops.ui.auth.SignUpScreen
 
 // Putting a Nested graph route
 object AuthGraph {
