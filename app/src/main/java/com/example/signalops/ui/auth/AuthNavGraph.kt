@@ -5,6 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
+object AuthRoutes {
+    const val LOGIN = "login"
+    const val SIGNUP = "signup"
+}
+
 @Composable
 fun AuthNavGraph(
     navController: NavHostController,
@@ -16,14 +21,15 @@ fun AuthNavGraph(
     ) {
         composable(AuthRoutes.LOGIN) {
             LoginScreen(
-                onSignUpClick = { navController.navigate(AuthRoutes.SIGN_UP) },
-                onLoginSuccess = onAuthSuccess
+                onLoginSuccess = { onAuthSuccess() },
+                onNavigateToSignup = { navController.navigate(AuthRoutes.SIGNUP) }
             )
         }
-        composable(AuthRoutes.SIGN_UP) {
+
+        composable(AuthRoutes.SIGNUP) {
             SignUpScreen(
-                onBackToLogin = { navController.popBackStack() },
-                onSignUpSuccess = onAuthSuccess
+                onNavigateBack = { navController.popBackStack() },
+                onSignupSuccess = { onAuthSuccess() }
             )
         }
     }

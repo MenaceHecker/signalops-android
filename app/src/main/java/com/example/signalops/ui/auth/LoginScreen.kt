@@ -15,7 +15,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun LoginScreen(
     onNavigateToSignup: () -> Unit,
-    onLoginSuccess: () -> Unit
+    onLoginSuccess: () -> Unit,
+
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
