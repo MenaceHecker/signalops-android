@@ -76,4 +76,7 @@ dependencies {
 
     // Optional (nice icons)
     implementation("androidx.compose.material:material-icons-extended")
+
+    // For Splashscreen
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }
