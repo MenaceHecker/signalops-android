@@ -2,4 +2,18 @@
 <resources>
 
     <style name="Theme.SignalOps" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.SignalOps.Splash" parent="Theme.SplashScreen">
+        <!-- background color -->
+        <item name="windowSplashScreenBackground">@color/splash_background</item>
+
+        <!-- your logo -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/signalops_logo</item>
+
+        <!-- optional: logo size hint -->
+        <item name="windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
+
+        <!-- where to go after splash -->
+        <item name="postSplashScreenTheme">@style/Theme.SignalOps</item>
+    </style>
+
 </resources>
