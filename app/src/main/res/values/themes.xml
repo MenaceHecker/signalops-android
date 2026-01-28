@@ -7,7 +7,7 @@
         <item name="windowSplashScreenBackground">@color/splash_background</item>
 
         <!-- your logo -->
-        <item name="windowSplashScreenAnimatedIcon">@drawable/signalops_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/SignalOps_icon</item>
 
         <!-- optional: logo size hint -->
         <item name="windowSplashScreenIconBackgroundColor">@android:color/transparent</item>
