@@ -84,7 +84,7 @@ fun LoginScreen(
         }
 
         Button(
-            enabled = !state.loading,
+            enabled = isFormValid && !state.loading,
             onClick = { vm.login(email, password, onLoginSuccess) }
         ) { Text(if (state.loading) "Signing in..." else "Login") }
 
