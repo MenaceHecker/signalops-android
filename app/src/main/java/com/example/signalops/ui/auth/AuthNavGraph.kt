@@ -1,14 +1,10 @@
 package com.example.signalops.ui.auth
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.signalops.data.AuthRepository
-import com.example.signalops.data.local.TokenStore
-import com.example.signalops.data.remote.ApiClient
 
 object AuthRoutes {
     const val LOGIN = "login"
@@ -20,12 +16,12 @@ fun AuthNavGraph(
     navController: NavHostController,
     onAuthSuccess: () -> Unit
 ) {
-    val context = LocalContext.current
-    val repo = remember { AuthRepository(ApiClient.authApi, TokenStore(context)) }
-    val vm = remember { AuthViewModel(repo) }
+    val vm: AuthViewModel = viewModel()
 
-    NavHost(navController = navController, startDestination = AuthRoutes.LOGIN) {
-
+    NavHost(
+        navController = navController,
+        startDestination = AuthRoutes.LOGIN
+    ) {
         composable(AuthRoutes.LOGIN) {
             LoginScreen(
                 vm = vm,
