@@ -27,4 +27,16 @@ class AuthViewModel(private val repo: AuthRepository) : ViewModel() {
             if (result.isSuccess) onSuccess()
         }
     }
+
+    fun signup(email: String, password: String, onSuccess: () -> Unit) {
+        _state.value = AuthUiState(loading = true)
+        viewModelScope.launch {
+            val result = repo.register(email, password)
+            _state.value = AuthUiState(
+                loading = false,
+                error = result.exceptionOrNull()?.message
+            )
+            if (result.isSuccess) onSuccess()
+        }
+    }
 }
