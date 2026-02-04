@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.collectAsState
 
 @Composable
 fun SignUpScreen(
@@ -84,10 +85,10 @@ fun SignUpScreen(
         )
 
         Spacer(Modifier.height(20.dp))
-
+        val state by vm.state.collectAsState()
         Button(
             onClick = { vm.signup(email, password, onSignupSuccess) },
-            enabled = isFormValid,
+            enabled = isFormValid && !state.loading,
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Sign Up")
