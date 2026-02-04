@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun LoginScreen(
+    vm: AuthViewModel,
     onNavigateToSignup: () -> Unit,
     onLoginSuccess: () -> Unit,
 
@@ -75,9 +76,12 @@ fun LoginScreen(
         Spacer(Modifier.height(20.dp))
 
         Button(
-            onClick = { onLoginSuccess() },
+            onClick = { onLoginSuccess()
+                vm.login(email, password, onLoginSuccess)
+            },
             enabled = isFormValid,
             modifier = Modifier.fillMaxWidth()
+
         ) {
             Text("Log In")
         }
