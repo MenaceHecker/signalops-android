@@ -18,10 +18,7 @@ fun AuthNavGraph(
 ) {
     val vm: AuthViewModel = viewModel()
 
-    NavHost(
-        navController = navController,
-        startDestination = AuthRoutes.LOGIN
-    ) {
+    NavHost(navController = navController, startDestination = AuthRoutes.LOGIN) {
         composable(AuthRoutes.LOGIN) {
             LoginScreen(
                 vm = vm,
@@ -29,7 +26,6 @@ fun AuthNavGraph(
                 onLoginSuccess = onAuthSuccess
             )
         }
-
         composable(AuthRoutes.SIGN_UP) {
             SignUpScreen(
                 vm = vm,
