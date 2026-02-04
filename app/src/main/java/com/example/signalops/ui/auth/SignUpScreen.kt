@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SignUpScreen(
+    vm: AuthViewModel,
     onNavigateBack: () -> Unit,
     onSignupSuccess: () -> Unit
 ) {
