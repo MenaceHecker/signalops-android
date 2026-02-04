@@ -1,24 +1,19 @@
 package com.example.signalops.data.local
 
 import android.content.Context
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import androidx.core.content.edit
 
-private val Context.dataStore by preferencesDataStore(name = "signalops_prefs")
+class TokenStore(context: Context) {
 
-class TokenStore(private val context: Context) {
-    private val key = stringPreferencesKey("jwt_token")
+    private val prefs = context.getSharedPreferences("signalops", Context.MODE_PRIVATE)
 
-    val tokenFlow: Flow<String?> = context.dataStore.data.map { it[key] }
-
-    suspend fun save(token: String) {
-        context.dataStore.edit { it[key] = token }
+    fun save(token: String) {
+        prefs.edit { putString("jwt", token) }
     }
 
-    suspend fun clear() {
-        context.dataStore.edit { it.remove(key) }
+    fun get(): String? = prefs.getString("jwt", null)
+
+    fun clear() {
+        prefs.edit { remove("jwt") }
     }
 }
