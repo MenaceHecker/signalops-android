@@ -75,16 +75,17 @@ fun LoginScreen(
 
         Spacer(Modifier.height(20.dp))
 
-        Button(
-            onClick = { onLoginSuccess()
-                vm.login(email, password, onLoginSuccess)
-            },
-            enabled = isFormValid,
-            modifier = Modifier.fillMaxWidth()
+        val state by vm.state.collectAsState()
 
-        ) {
-            Text("Log In")
+        if (state.error != null) {
+            Text(state.error!!, color = MaterialTheme.colorScheme.error)
         }
+
+        Button(
+            enabled = !state.loading,
+            onClick = { vm.login(email, password, onLoginSuccess) }
+        ) { Text(if (state.loading) "Signing in..." else "Login") }
+
 
         Spacer(Modifier.height(12.dp))
 
