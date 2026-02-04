@@ -68,8 +68,9 @@ dependencies {
     implementation("androidx.compose.material3:material3")
 
     // Activity + lifecycle
-    implementation("androidx.activity:activity-compose:1.9.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     // Navigation Compose
     implementation("androidx.navigation:navigation-compose:2.7.7")
