@@ -13,9 +13,11 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(app: Application) : AndroidViewModel(app) {
 
+    private val tokenStore = TokenStore(app.applicationContext)
+
     private val repo = AuthRepository(
-        api = ApiClient.authApi,
-        tokenStore = TokenStore(app.applicationContext)
+        api = ApiClient.create(tokenStore),
+        tokenStore = tokenStore
     )
 
     private val _state = MutableStateFlow(AuthState())
