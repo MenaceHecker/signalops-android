@@ -11,12 +11,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.collectAsState
+
 
 @Composable
 fun LoginScreen(
     vm: AuthViewModel,
     onNavigateToSignup: () -> Unit,
-    onLoginSuccess: () -> Unit,
+    onLoginSuccess: () -> Unit
 
 ) {
     var email by remember { mutableStateOf("") }
