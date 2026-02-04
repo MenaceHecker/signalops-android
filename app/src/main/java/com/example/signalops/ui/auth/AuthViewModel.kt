@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.signalops.data.AuthRepository
 import com.example.signalops.data.local.TokenStore
-import com.example.signalops.data.remote.ApiProvider
+import com.example.signalops.data.remote.ApiClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class AuthViewModel(app: Application) : AndroidViewModel(app) {
 
     private val repo = AuthRepository(
-        api = ApiProvider.authApi,
+        api = ApiClient.authApi,
         tokenStore = TokenStore(app.applicationContext)
     )
 
