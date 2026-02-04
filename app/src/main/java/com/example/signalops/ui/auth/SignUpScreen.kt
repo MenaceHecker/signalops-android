@@ -86,7 +86,7 @@ fun SignUpScreen(
         Spacer(Modifier.height(20.dp))
 
         Button(
-            onClick = { onSignupSuccess() },
+            onClick = { vm.signup(email, password, onSignupSuccess) },
             enabled = isFormValid,
             modifier = Modifier.fillMaxWidth()
         ) {
