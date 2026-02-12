@@ -1,11 +1,11 @@
 package com.example.signalops.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.signalops.ui.auth.AuthNavGraph
-import com.example.signalops.ui.dashboard.Dashboard
+import com.example.signalops.ui.dashboard.DashboardScreen
 
 object AppRoutes {
     const val AUTH = "auth"
@@ -13,9 +13,7 @@ object AppRoutes {
 }
 
 @Composable
-fun AppNavGraph() {
-    val navController = rememberNavController()
-
+fun AppNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = AppRoutes.AUTH
@@ -25,15 +23,22 @@ fun AppNavGraph() {
                 navController = navController,
                 onAuthSuccess = {
                     navController.navigate(AppRoutes.DASHBOARD) {
-                        // Remove auth from backstack so back doesn't return to login/signup
                         popUpTo(AppRoutes.AUTH) { inclusive = true }
+                        launchSingleTop = true
                     }
                 }
             )
         }
 
         composable(AppRoutes.DASHBOARD) {
-            Dashboard()
+            DashboardScreen(
+                onLogout = {
+                    navController.navigate(AppRoutes.AUTH) {
+                        popUpTo(AppRoutes.DASHBOARD) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
     }
 }
