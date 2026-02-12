@@ -13,6 +13,6 @@ fun ServicesScreen() {
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Text("Services", style = MaterialTheme.typography.headlineMedium)
-        Text("We’ll list monitored services here.", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text("Monitored services will be here.", color = MaterialTheme.colorScheme.onSurfaceVariant)
     }
 }
