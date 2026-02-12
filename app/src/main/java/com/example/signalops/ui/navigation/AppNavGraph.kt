@@ -5,11 +5,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.signalops.ui.auth.AuthNavGraph
-import com.example.signalops.ui.dashboard.DashboardScreen
 
 object AppRoutes {
     const val AUTH = "auth"
-    const val DASHBOARD = "dashboard"
+    const val MAIN = "main"
 }
 
 @Composable
@@ -22,7 +21,7 @@ fun AppNavGraph(navController: NavHostController) {
             AuthNavGraph(
                 navController = navController,
                 onAuthSuccess = {
-                    navController.navigate(AppRoutes.DASHBOARD) {
+                    navController.navigate(AppRoutes.MAIN) {
                         popUpTo(AppRoutes.AUTH) { inclusive = true }
                         launchSingleTop = true
                     }
@@ -30,11 +29,11 @@ fun AppNavGraph(navController: NavHostController) {
             )
         }
 
-        composable(AppRoutes.DASHBOARD) {
-            DashboardScreen(
+        composable(AppRoutes.MAIN) {
+            MainShell(
                 onLogout = {
                     navController.navigate(AppRoutes.AUTH) {
-                        popUpTo(AppRoutes.DASHBOARD) { inclusive = true }
+                        popUpTo(AppRoutes.MAIN) { inclusive = true }
                         launchSingleTop = true
                     }
                 }
