@@ -12,4 +12,5 @@ interface AuthApi {
 
     @POST("api/auth/login")
     suspend fun login(@Body req: LoginRequest): AuthResponse
+    
 }
