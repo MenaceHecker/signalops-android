@@ -3,6 +3,7 @@ package com.example.signalops.ui.dashboard
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
@@ -50,4 +51,23 @@ private fun fakeIncidents(): List<IncidentPreview> {
     )
     val count = Random.nextInt(1, 5)
     return all.shuffled().take(count)
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun DashboardScreen(
+    userName: String = "Tushar",
+) {
+    var isRefreshing by remember { mutableStateOf(false) }
+    var env by remember { mutableStateOf("Local") }
+
+    var stats by remember { mutableStateOf(fakeStats()) }
+    var incidents by remember { mutableStateOf(fakeIncidents()) }
+
+    val pullRefreshState = rememberPullRefreshState(
+        refreshing = isRefreshing,
+        onRefresh = {
+            isRefreshing = true
+        }
+    )
 }
