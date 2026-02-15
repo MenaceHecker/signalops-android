@@ -39,3 +39,15 @@ private fun fakeStats(): DashboardStats {
         p95LatencyMs = Random.nextInt(80, 420)
     )
 }
+private fun fakeIncidents(): List<IncidentPreview> {
+    val all = listOf(
+        IncidentPreview("High error rate detected", "auth-api", "P1", "5m ago"),
+        IncidentPreview("Latency spike", "metrics-ingest", "P2", "18m ago"),
+        IncidentPreview("DB connection pool saturation", "postgres", "P2", "41m ago"),
+        IncidentPreview("Elevated 5xx responses", "gateway", "P1", "1h ago"),
+        IncidentPreview("Slow queries", "reporting", "P3", "2h ago"),
+        IncidentPreview("CPU throttling", "worker", "P3", "3h ago"),
+    )
+    val count = Random.nextInt(1, 5)
+    return all.shuffled().take(count)
+}
