@@ -28,3 +28,14 @@ private data class IncidentPreview(
     val severity: String,
     val timeAgo: String
 )
+
+private fun fakeStats(): DashboardStats {
+    val total = 12
+    val up = Random.nextInt(10, 13)
+    return DashboardStats(
+        servicesUp = up.coerceAtMost(total),
+        servicesTotal = total,
+        incidentsToday = Random.nextInt(0, 4),
+        p95LatencyMs = Random.nextInt(80, 420)
+    )
+}
