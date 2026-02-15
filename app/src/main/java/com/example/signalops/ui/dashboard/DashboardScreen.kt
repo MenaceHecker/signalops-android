@@ -122,3 +122,33 @@ fun DashboardScreen(
         )
     }
 }
+@Composable
+private fun GreetingHeader(
+    userName: String,
+    env: String,
+    onToggleEnv: () -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column {
+            Text(
+                text = "Hey, $userName",
+                style = MaterialTheme.typography.headlineMedium
+            )
+            Spacer(Modifier.height(2.dp))
+            Text(
+                text = "Here’s what’s happening right now",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+
+        AssistChip(
+            onClick = onToggleEnv,
+            label = { Text(env) }
+        )
+    }
+}
