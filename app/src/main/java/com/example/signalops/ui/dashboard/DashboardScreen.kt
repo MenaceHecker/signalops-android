@@ -70,4 +70,55 @@ fun DashboardScreen(
             isRefreshing = true
         }
     )
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .pullRefresh(pullRefreshState)
+    ) {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(20.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            item {
+                GreetingHeader(
+                    userName = userName,
+                    env = env,
+                    onToggleEnv = { env = if (env == "Local") "Prod" else "Local" }
+                )
+            }
+
+            item {
+                StatsRow(stats = stats)
+            }
+
+            item {
+                Text(
+                    text = "Recent Incidents",
+                    style = MaterialTheme.typography.titleLarge
+                )
+            }
+
+            items(incidents) { inc ->
+                IncidentCard(inc)
+            }
+
+            item {
+                Spacer(Modifier.height(24.dp))
+                Text(
+                    text = "Pull down to refresh • fake data for now",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        PullRefreshIndicator(
+            refreshing = isRefreshing,
+            state = pullRefreshState,
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 8.dp)
+        )
+    }
 }
