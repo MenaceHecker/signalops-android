@@ -152,3 +152,58 @@ private fun GreetingHeader(
         )
     }
 }
+@Composable
+private fun StatsRow(stats: DashboardStats) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        StatCard(
+            title = "Services",
+            value = "${stats.servicesUp}/${stats.servicesTotal}",
+            subtitle = "Healthy"
+        )
+        StatCard(
+            title = "Incidents",
+            value = "${stats.incidentsToday}",
+            subtitle = "Today"
+        )
+        StatCard(
+            title = "Latency",
+            value = "${stats.p95LatencyMs}ms",
+            subtitle = "p95"
+        )
+    }
+}
+@Composable
+private fun StatCard(
+    title: String,
+    value: String,
+    subtitle: String
+) {
+    ElevatedCard(
+        modifier = Modifier.weight(1f)
+    ) {
+        Column(
+            modifier = Modifier.padding(14.dp)
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(Modifier.height(6.dp))
+            Text(
+                text = value,
+                style = MaterialTheme.typography.titleLarge
+            )
+            Spacer(Modifier.height(2.dp))
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
