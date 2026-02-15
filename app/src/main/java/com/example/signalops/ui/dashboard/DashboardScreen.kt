@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
+
 private data class DashboardStats(
     val servicesUp: Int,
     val servicesTotal: Int,
@@ -161,17 +162,20 @@ private fun StatsRow(stats: DashboardStats) {
         StatCard(
             title = "Services",
             value = "${stats.servicesUp}/${stats.servicesTotal}",
-            subtitle = "Healthy"
+            subtitle = "Healthy",
+            modifier = Modifier.weight(1f)
         )
         StatCard(
             title = "Incidents",
             value = "${stats.incidentsToday}",
-            subtitle = "Today"
+            subtitle = "Today",
+            modifier = Modifier.weight(1f)
         )
         StatCard(
             title = "Latency",
             value = "${stats.p95LatencyMs}ms",
-            subtitle = "p95"
+            subtitle = "p95",
+            modifier = Modifier.weight(1f)
         )
     }
 }
@@ -179,10 +183,11 @@ private fun StatsRow(stats: DashboardStats) {
 private fun StatCard(
     title: String,
     value: String,
+    modifier: Modifier = Modifier,
     subtitle: String
 ) {
     ElevatedCard(
-        modifier = Modifier.weight(1f)
+        modifier = modifier
     ) {
         Column(
             modifier = Modifier.padding(14.dp)
