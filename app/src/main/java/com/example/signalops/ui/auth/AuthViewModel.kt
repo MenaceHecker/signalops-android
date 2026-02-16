@@ -52,4 +52,15 @@ class AuthViewModel(app: Application) : AndroidViewModel(app) {
                 }
         }
     }
+    fun testMeEndpoint() {
+        viewModelScope.launch {
+            repo.me()
+                .onSuccess { email ->
+                    _state.value = _state.value.copy(error = "/api/me OK: $email")
+                }
+                .onFailure { e ->
+                    _state.value = _state.value.copy(error = "/api/me failed: ${e.message}")
+                }
+        }
+    }
 }
