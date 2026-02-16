@@ -18,4 +18,9 @@ class AuthRepository(
         val res = api.register(RegisterRequest(email.trim().lowercase(), password))
         tokenStore.save(res.token)
     }
+
+    suspend fun me(): Result<String> = runCatching {
+        api.me().email
+    }
+
 }
