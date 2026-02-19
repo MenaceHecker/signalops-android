@@ -3,6 +3,7 @@ package com.example.signalops.data.remote
 import com.example.signalops.data.remote.dto.AuthResponse
 import com.example.signalops.data.remote.dto.LoginRequest
 import com.example.signalops.data.remote.dto.RegisterRequest
+import com.example.signalops.data.remote.dto.UserProfileResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.GET
@@ -20,8 +21,6 @@ interface AuthApi {
     suspend fun login(@Body req: LoginRequest): AuthResponse
 
     @GET("/api/me")
-    suspend fun me(): MeResponse
-
-
+    suspend fun me(): UserProfileResponse
 
 }
