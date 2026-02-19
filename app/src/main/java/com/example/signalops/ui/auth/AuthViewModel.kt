@@ -63,4 +63,16 @@ class AuthViewModel(app: Application) : AndroidViewModel(app) {
                 }
         }
     }
+
+    fun loadProfile() {
+        viewModelScope.launch {
+            repo.getProfile()
+                .onSuccess { profile ->
+                    println("PROFILE: $profile")
+                }
+                .onFailure { e ->
+                    println("PROFILE ERROR: ${e.message}")
+                }
+        }
+    }
 }

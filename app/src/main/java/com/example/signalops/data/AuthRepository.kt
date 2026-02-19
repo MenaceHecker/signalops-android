@@ -4,6 +4,7 @@ import com.example.signalops.data.local.TokenStore
 import com.example.signalops.data.remote.AuthApi
 import com.example.signalops.data.remote.dto.LoginRequest
 import com.example.signalops.data.remote.dto.RegisterRequest
+import com.example.signalops.data.remote.dto.UserProfileResponse
 
 class AuthRepository(
     private val api: AuthApi,
@@ -22,5 +23,10 @@ class AuthRepository(
     suspend fun me(): Result<String> = runCatching {
         api.me().email
     }
+
+    suspend fun getProfile(): Result<UserProfileResponse> = runCatching {
+        api.me()
+    }
+
 
 }
