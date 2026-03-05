@@ -91,4 +91,6 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     implementation("androidx.compose.material:material:1.6.8")
+    // lifecycle
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.2")
 }

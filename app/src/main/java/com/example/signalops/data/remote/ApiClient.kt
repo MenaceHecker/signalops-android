@@ -7,7 +7,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "http://10.0.2.2:8080"
+
+    // ✅ IMPORTANT: Retrofit baseUrl must end with "/"
+    private const val BASE_URL = "http://10.0.2.2:8080/"
 
     fun createAuthApi(tokenStore: TokenStore): AuthApi =
         retrofit(tokenStore).create(AuthApi::class.java)
@@ -16,7 +18,9 @@ object ApiClient {
         retrofit(tokenStore).create(UserApi::class.java)
 
     private fun retrofit(tokenStore: TokenStore): Retrofit {
-        val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+        val logger = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
 
         val okHttp = OkHttpClient.Builder()
             .addInterceptor(AuthInterceptor(tokenStore))
@@ -30,4 +34,3 @@ object ApiClient {
             .build()
     }
 }
-

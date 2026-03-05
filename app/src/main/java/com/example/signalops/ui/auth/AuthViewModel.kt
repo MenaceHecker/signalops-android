@@ -16,7 +16,7 @@ class AuthViewModel(app: Application) : AndroidViewModel(app) {
     private val tokenStore = TokenStore(app.applicationContext)
 
     private val repo = AuthRepository(
-        api = ApiClient.create(tokenStore),
+        api = ApiClient.createAuthApi(tokenStore),
         tokenStore = tokenStore
     )
 
@@ -52,6 +52,7 @@ class AuthViewModel(app: Application) : AndroidViewModel(app) {
                 }
         }
     }
+
     fun testMeEndpoint() {
         viewModelScope.launch {
             repo.me()
