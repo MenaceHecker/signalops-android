@@ -12,25 +12,36 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-data class ProfileState(
+data class ProfileUiState(
     val loading: Boolean = false,
     val profile: UserProfileResponse? = null,
     val error: String? = null
 )
 
 class ProfileViewModel(app: Application) : AndroidViewModel(app) {
+
     private val tokenStore = TokenStore(app.applicationContext)
-    private val repo = UserRepository(ApiClient.createUserApi(tokenStore))
 
-    private val _state = MutableStateFlow(ProfileState())
-    val state: StateFlow<ProfileState> = _state.asStateFlow()
+    private val repo = UserRepository(
+        api = ApiClient.createUserApi(tokenStore)
+    )
 
-    fun fetchProfile() {
+    private val _state = MutableStateFlow(ProfileUiState())
+    val state: StateFlow<ProfileUiState> = _state.asStateFlow()
+
+    fun loadProfile() {
         viewModelScope.launch {
-            _state.value = ProfileState(loading = true)
-            repo.me()
-                .onSuccess { _state.value = ProfileState(profile = it) }
-                .onFailure { _state.value = ProfileState(error = it.message ?: "Failed") }
+            _state.value = ProfileUiState(loading = true)
+
+            repo.getProfile()
+                .onSuccess { profile ->
+                    _state.value = ProfileUiState(profile = profile)
+                }
+                .onFailure { e ->
+                    _state.value = ProfileUiState(
+                        error = e.message ?: "Failed to load profile"
+                    )
+                }
         }
     }
 }
