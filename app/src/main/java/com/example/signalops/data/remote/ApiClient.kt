@@ -31,4 +31,7 @@ object ApiClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    fun createIncidentApi(tokenStore: TokenStore): IncidentApi =
+        retrofit(tokenStore).create(IncidentApi::class.java)
 }
