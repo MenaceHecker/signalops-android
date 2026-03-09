@@ -21,13 +21,20 @@ import com.example.signalops.ui.main.ProfileViewModel
 
 @Composable
 fun DashboardScreen(
-    vm: ProfileViewModel = viewModel()
+    profileVm: ProfileViewModel = viewModel(),
+    dashboardVm: DashboardViewModel = viewModel()
 ) {
-    val state by vm.state.collectAsState()
+    val profileState by profileVm.state.collectAsState()
+    val dashboardState by dashboardVm.state.collectAsState()
 
     LaunchedEffect(Unit) {
-        vm.loadProfile()
+        profileVm.loadProfile()
+        dashboardVm.loadSummary()
     }
+
+    val totalIncidents = dashboardState.incidents.size
+    val investigatingCount = dashboardState.incidents.count { it.status.equals("INVESTIGATING", ignoreCase = true) }
+    val highSeverityCount = dashboardState.incidents.count { it.severity.equals("HIGH", ignoreCase = true) }
 
     Column(
         modifier = Modifier
@@ -49,25 +56,54 @@ fun DashboardScreen(
                 Spacer(Modifier.height(8.dp))
 
                 when {
-                    state.loading -> {
+                    profileState.loading -> {
                         Text("Loading profile...")
                     }
 
-                    state.error != null -> {
+                    profileState.error != null -> {
                         Text(
-                            text = "Error: ${state.error}",
+                            text = "Error: ${profileState.error}",
                             color = MaterialTheme.colorScheme.error
                         )
                     }
 
-                    state.profile != null -> {
-                        Text("Email: ${state.profile!!.email}")
-                        Text("Role: ${state.profile!!.role}")
-                        Text("Joined: ${state.profile!!.createdAt}")
+                    profileState.profile != null -> {
+                        Text("Email: ${profileState.profile!!.email}")
+                        Text("Role: ${profileState.profile!!.role}")
+                        Text("Joined: ${profileState.profile!!.createdAt}")
                     }
 
                     else -> {
                         Text("No profile data available")
+                    }
+                }
+            }
+        }
+
+        ElevatedCard(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Text(
+                    text = "Incident Summary",
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Spacer(Modifier.height(8.dp))
+
+                when {
+                    dashboardState.loading -> {
+                        Text("Loading summary...")
+                    }
+
+                    dashboardState.error != null -> {
+                        Text(
+                            text = "Error: ${dashboardState.error}",
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
+
+                    else -> {
+                        Text("Total incidents: $totalIncidents")
+                        Text("Investigating: $investigatingCount")
+                        Text("High severity: $highSeverityCount")
                     }
                 }
             }
@@ -81,17 +117,6 @@ fun DashboardScreen(
                 )
                 Spacer(Modifier.height(6.dp))
                 Text("All services healthy (placeholder)")
-            }
-        }
-
-        ElevatedCard(modifier = Modifier.fillMaxWidth()) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = "Today's Summary",
-                    style = MaterialTheme.typography.titleMedium
-                )
-                Spacer(Modifier.height(6.dp))
-                Text("0 incidents • 99.9% uptime (placeholder)")
             }
         }
     }
