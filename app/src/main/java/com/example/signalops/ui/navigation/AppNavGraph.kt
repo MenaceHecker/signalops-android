@@ -8,8 +8,12 @@ import com.example.signalops.ui.auth.AuthRoutes
 import com.example.signalops.ui.auth.authGraph
 
 object AppRoutes {
+    const val LOGIN = "login"
+    const val SIGN_UP = "signup"
     const val MAIN = "main"
+    const val INCIDENT_DETAIL = "incident_detail"
 }
+
 
 @Composable
 fun AppNavGraph(navController: NavHostController) {
