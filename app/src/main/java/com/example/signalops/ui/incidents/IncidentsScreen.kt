@@ -29,7 +29,7 @@ fun IncidentsScreen(
 ) {
     val state by vm.state.collectAsStateWithLifecycle()
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(true) {
         vm.loadIncidents()
     }
 
