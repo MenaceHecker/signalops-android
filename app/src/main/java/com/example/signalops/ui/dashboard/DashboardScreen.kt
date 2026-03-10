@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.signalops.ui.main.ProfileViewModel
+import com.example.signalops.ui.utils.TimeUtils
 
 @Composable
 fun DashboardScreen(
@@ -70,7 +71,11 @@ fun DashboardScreen(
                     profileState.profile != null -> {
                         Text("Email: ${profileState.profile!!.email}")
                         Text("Role: ${profileState.profile!!.role}")
-                        Text("Joined: ${profileState.profile!!.createdAt}")
+                        Text(
+                            "Joined: ${
+                                TimeUtils.formatTimestamp(profileState.profile!!.createdAt)
+                            }"
+                        )
                     }
 
                     else -> {
