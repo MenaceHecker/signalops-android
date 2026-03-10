@@ -22,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.signalops.ui.dashboard.DashboardScreen
+import com.example.signalops.ui.incidents.CreateIncidentScreen
 import com.example.signalops.ui.incidents.IncidentDetailScreen
 import com.example.signalops.ui.incidents.IncidentsScreen
 import com.example.signalops.ui.settings.SettingsScreen
@@ -31,6 +32,7 @@ private object MainRoutes {
     const val INCIDENTS = "incidents"
     const val SETTINGS = "settings"
     const val INCIDENT_DETAIL = "incident_detail"
+    const val CREATE_INCIDENT = "create_incident"
 }
 
 @Composable
@@ -102,12 +104,22 @@ private fun MainNavGraph(
                                 "${Uri.encode(status)}/" +
                                 "${Uri.encode(createdAt)}"
                     )
+                },
+                onCreateIncident = {
+                    navController.navigate(MainRoutes.CREATE_INCIDENT)
                 }
             )
         }
 
         composable(MainRoutes.SETTINGS) {
             SettingsScreen(onLogout = onLogout)
+        }
+
+        composable(MainRoutes.CREATE_INCIDENT) {
+            CreateIncidentScreen(
+                onBack = { navController.popBackStack() },
+                onCreated = { navController.popBackStack() }
+            )
         }
 
         composable(
