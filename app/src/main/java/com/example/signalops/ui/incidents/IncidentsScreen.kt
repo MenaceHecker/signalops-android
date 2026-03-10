@@ -20,13 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.signalops.ui.utils.TimeUtils
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun IncidentsScreen(
     onIncidentClick: (title: String, severity: String, status: String, createdAt: String) -> Unit,
     vm: IncidentViewModel = viewModel()
 ) {
-    val state by vm.state.collectAsState()
+    val state by vm.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         vm.loadIncidents()
