@@ -22,6 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun IncidentsScreen(
+    onIncidentClick: (title: String, severity: String, status: String, createdAt: String) -> Unit,
     vm: IncidentViewModel = viewModel()
 ) {
     val state by vm.state.collectAsState()
