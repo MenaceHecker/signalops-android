@@ -83,7 +83,17 @@ fun IncidentsScreen(
                 }
 
                 items(state.incidents) { incident ->
-                    ElevatedCard(modifier = Modifier.fillMaxWidth()) {
+                    ElevatedCard(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = {
+                            onIncidentClick(
+                                incident.title,
+                                incident.severity,
+                                incident.status,
+                                incident.createdAt
+                            )
+                        }
+                    ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text(
                                 text = incident.title,
