@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.signalops.ui.utils.TimeUtils
 
 @Composable
 fun IncidentDetailScreen(
@@ -43,7 +44,7 @@ fun IncidentDetailScreen(
                 Spacer(Modifier.height(10.dp))
                 Text("Severity: $severity")
                 Text("Status: $status")
-                Text("Created: $createdAt")
+                Text("Created: ${TimeUtils.formatTimestamp(createdAt)}")
             }
         }
 
