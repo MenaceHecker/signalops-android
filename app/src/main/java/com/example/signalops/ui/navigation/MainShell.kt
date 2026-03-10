@@ -40,24 +40,27 @@ fun MainShell(
     onLogout: () -> Unit
 ) {
     val navController = rememberNavController()
+
     val items = listOf(
         MainRoutes.DASHBOARD to Pair("Dashboard", Icons.Default.Home),
         MainRoutes.INCIDENTS to Pair("Incidents", Icons.Default.List),
-        MainRoutes.SETTINGS to Pair("Settings", Icons.Default.Settings),
+        MainRoutes.SETTINGS to Pair("Settings", Icons.Default.Settings)
     )
 
     Scaffold(
         bottomBar = {
             NavigationBar {
                 val backStackEntry by navController.currentBackStackEntryAsState()
-                val current = backStackEntry?.destination?.route
+                val currentRoute = backStackEntry?.destination?.route
 
                 items.forEach { (route, meta) ->
                     NavigationBarItem(
-                        selected = current == route,
+                        selected = currentRoute == route,
                         onClick = {
                             navController.navigate(route) {
-                                popUpTo(navController.graph.startDestinationId) { saveState = true }
+                                popUpTo(navController.graph.startDestinationId) {
+                                    saveState = true
+                                }
                                 launchSingleTop = true
                                 restoreState = true
                             }

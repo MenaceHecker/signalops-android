@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,17 +20,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.signalops.ui.utils.TimeUtils
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun IncidentsScreen(
     onIncidentClick: (title: String, severity: String, status: String, createdAt: String) -> Unit,
+    onCreateIncident: () -> Unit,
     vm: IncidentViewModel = viewModel()
 ) {
-    val state by vm.state.collectAsStateWithLifecycle()
+    val state by vm.state.collectAsState()
 
-    LaunchedEffect(true) {
+    LaunchedEffect(Unit) {
         vm.loadIncidents()
     }
 
@@ -42,6 +42,10 @@ fun IncidentsScreen(
             ) {
                 Text("Incidents", style = MaterialTheme.typography.headlineMedium)
                 Spacer(Modifier.height(12.dp))
+                Button(onClick = onCreateIncident) {
+                    Text("New Incident")
+                }
+                Spacer(Modifier.height(12.dp))
                 Text("Loading incidents...")
             }
         }
@@ -53,6 +57,10 @@ fun IncidentsScreen(
                     .padding(20.dp)
             ) {
                 Text("Incidents", style = MaterialTheme.typography.headlineMedium)
+                Spacer(Modifier.height(12.dp))
+                Button(onClick = onCreateIncident) {
+                    Text("New Incident")
+                }
                 Spacer(Modifier.height(12.dp))
                 Text(
                     text = "Error: ${state.error}",
@@ -69,6 +77,10 @@ fun IncidentsScreen(
             ) {
                 Text("Incidents", style = MaterialTheme.typography.headlineMedium)
                 Spacer(Modifier.height(12.dp))
+                Button(onClick = onCreateIncident) {
+                    Text("New Incident")
+                }
+                Spacer(Modifier.height(12.dp))
                 Text("No incidents found")
             }
         }
@@ -82,6 +94,10 @@ fun IncidentsScreen(
             ) {
                 item {
                     Text("Incidents", style = MaterialTheme.typography.headlineMedium)
+                    Spacer(Modifier.height(8.dp))
+                    Button(onClick = onCreateIncident) {
+                        Text("New Incident")
+                    }
                 }
 
                 items(state.incidents) { incident ->
@@ -104,7 +120,7 @@ fun IncidentsScreen(
                             Spacer(Modifier.height(6.dp))
                             Text("Severity: ${incident.severity}")
                             Text("Status: ${incident.status}")
-                            Text("Created: ${TimeUtils.formatTimestamp(incident.createdAt)}")
+                            Text("Created: ${incident.createdAt}")
                         }
                     }
                 }
