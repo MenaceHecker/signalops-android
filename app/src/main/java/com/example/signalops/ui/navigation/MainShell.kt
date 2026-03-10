@@ -1,5 +1,6 @@
 package com.example.signalops.ui.navigation
 
+import android.net.Uri
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -7,12 +8,21 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.*
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.signalops.ui.dashboard.DashboardScreen
+import com.example.signalops.ui.incidents.IncidentDetailScreen
 import com.example.signalops.ui.incidents.IncidentsScreen
 import com.example.signalops.ui.settings.SettingsScreen
 
@@ -20,6 +30,7 @@ private object MainRoutes {
     const val DASHBOARD = "dashboard"
     const val INCIDENTS = "incidents"
     const val SETTINGS = "settings"
+    const val INCIDENT_DETAIL = "incident_detail"
 }
 
 @Composable
@@ -77,8 +88,43 @@ private fun MainNavGraph(
             .fillMaxSize()
             .padding(padding)
     ) {
-        composable(MainRoutes.DASHBOARD) { DashboardScreen() }
-        composable(MainRoutes.INCIDENTS) { IncidentsScreen() }
-        composable(MainRoutes.SETTINGS) { SettingsScreen(onLogout = onLogout) }
+        composable(MainRoutes.DASHBOARD) {
+            DashboardScreen()
+        }
+
+        composable(MainRoutes.INCIDENTS) {
+            IncidentsScreen(
+                onIncidentClick = { title, severity, status, createdAt ->
+                    navController.navigate(
+                        "${MainRoutes.INCIDENT_DETAIL}/" +
+                                "${Uri.encode(title)}/" +
+                                "${Uri.encode(severity)}/" +
+                                "${Uri.encode(status)}/" +
+                                "${Uri.encode(createdAt)}"
+                    )
+                }
+            )
+        }
+
+        composable(MainRoutes.SETTINGS) {
+            SettingsScreen(onLogout = onLogout)
+        }
+
+        composable(
+            route = "${MainRoutes.INCIDENT_DETAIL}/{title}/{severity}/{status}/{createdAt}"
+        ) { backStackEntry ->
+            val title = Uri.decode(backStackEntry.arguments?.getString("title").orEmpty())
+            val severity = Uri.decode(backStackEntry.arguments?.getString("severity").orEmpty())
+            val status = Uri.decode(backStackEntry.arguments?.getString("status").orEmpty())
+            val createdAt = Uri.decode(backStackEntry.arguments?.getString("createdAt").orEmpty())
+
+            IncidentDetailScreen(
+                title = title,
+                severity = severity,
+                status = status,
+                createdAt = createdAt,
+                onBack = { navController.popBackStack() }
+            )
+        }
     }
 }
