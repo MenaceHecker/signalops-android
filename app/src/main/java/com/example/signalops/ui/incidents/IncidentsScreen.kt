@@ -23,6 +23,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.foundation.layout.Row
 
 @Composable
 fun IncidentsScreen(
@@ -132,8 +133,10 @@ fun IncidentsScreen(
                                 style = MaterialTheme.typography.titleMedium
                             )
                             Spacer(Modifier.height(6.dp))
-                            Text("Severity: ${incident.severity}")
-                            Text("Status: ${incident.status}")
+                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                SeverityChip(incident.severity)
+                                StatusChip(incident.status)
+                            }
                             Text("Created: ${incident.createdAt}")
                         }
                     }
