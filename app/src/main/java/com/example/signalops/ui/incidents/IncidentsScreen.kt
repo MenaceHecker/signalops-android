@@ -23,6 +23,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.signalops.ui.utils.TimeUtils
 import androidx.compose.foundation.layout.Row
 
 @Composable
@@ -137,7 +138,7 @@ fun IncidentsScreen(
                                 SeverityChip(incident.severity)
                                 StatusChip(incident.status)
                             }
-                            Text("Created: ${incident.createdAt}")
+                            Text("Created: ${TimeUtils.formatTimestamp(incident.createdAt)}")
                         }
                     }
                 }

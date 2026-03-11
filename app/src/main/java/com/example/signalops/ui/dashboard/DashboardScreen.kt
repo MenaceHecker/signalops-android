@@ -34,8 +34,10 @@ fun DashboardScreen(
     }
 
     val totalIncidents = dashboardState.incidents.size
-    val investigatingCount = dashboardState.incidents.count { it.status.equals("INVESTIGATING", ignoreCase = true) }
-    val highSeverityCount = dashboardState.incidents.count { it.severity.equals("HIGH", ignoreCase = true) }
+    val investigatingCount =
+        dashboardState.incidents.count { it.status.equals("INVESTIGATING", ignoreCase = true) }
+    val highSeverityCount =
+        dashboardState.incidents.count { it.severity.equals("HIGH", ignoreCase = true) }
 
     Column(
         modifier = Modifier
@@ -71,11 +73,7 @@ fun DashboardScreen(
                     profileState.profile != null -> {
                         Text("Email: ${profileState.profile!!.email}")
                         Text("Role: ${profileState.profile!!.role}")
-                        Text(
-                            "Joined: ${
-                                TimeUtils.formatTimestamp(profileState.profile!!.createdAt)
-                            }"
-                        )
+                        Text("Joined: ${TimeUtils.formatTimestamp(profileState.profile!!.createdAt)}")
                     }
 
                     else -> {
