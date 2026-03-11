@@ -3,6 +3,7 @@ package com.example.signalops.data
 import com.example.signalops.data.remote.IncidentApi
 import com.example.signalops.data.remote.dto.CreateIncidentRequest
 import com.example.signalops.data.remote.dto.IncidentResponse
+import com.example.signalops.data.remote.dto.UpdateIncidentStatusRequest
 
 class IncidentRepository(
     private val api: IncidentApi
@@ -22,6 +23,16 @@ class IncidentRepository(
                 severity = severity,
                 status = status
             )
+        )
+    }
+
+    suspend fun updateIncidentStatus(
+        id: Long,
+        status: String
+    ): Result<IncidentResponse> = runCatching {
+        api.updateIncidentStatus(
+            id = id,
+            req = UpdateIncidentStatusRequest(status = status)
         )
     }
 }
