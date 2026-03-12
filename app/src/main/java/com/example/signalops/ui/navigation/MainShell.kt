@@ -99,9 +99,10 @@ private fun MainNavGraph(
 
         composable(MainRoutes.INCIDENTS) {
             IncidentsScreen(
-                onIncidentClick = { title, severity, status, createdAt ->
+                onIncidentClick = { id, title, severity, status, createdAt ->
                     navController.navigate(
                         "${MainRoutes.INCIDENT_DETAIL}/" +
+                                "$id/" +
                                 "${Uri.encode(title)}/" +
                                 "${Uri.encode(severity)}/" +
                                 "${Uri.encode(status)}/" +
@@ -126,19 +127,22 @@ private fun MainNavGraph(
         }
 
         composable(
-            route = "${MainRoutes.INCIDENT_DETAIL}/{title}/{severity}/{status}/{createdAt}"
+            route = "${MainRoutes.INCIDENT_DETAIL}/{id}/{title}/{severity}/{status}/{createdAt}"
         ) { backStackEntry ->
+            val id = backStackEntry.arguments?.getString("id")?.toLongOrNull() ?: 0L
             val title = Uri.decode(backStackEntry.arguments?.getString("title").orEmpty())
             val severity = Uri.decode(backStackEntry.arguments?.getString("severity").orEmpty())
             val status = Uri.decode(backStackEntry.arguments?.getString("status").orEmpty())
             val createdAt = Uri.decode(backStackEntry.arguments?.getString("createdAt").orEmpty())
 
             IncidentDetailScreen(
+                id = id,
                 title = title,
                 severity = severity,
                 status = status,
                 createdAt = createdAt,
-                onBack = { navController.popBackStack() }
+                onBack = { navController.popBackStack() },
+                onStatusUpdated = { navController.popBackStack() }
             )
         }
     }
