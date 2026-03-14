@@ -25,6 +25,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.signalops.ui.utils.TimeUtils
 
+//Updated params
 @Composable
 fun IncidentsScreen(
     onIncidentClick: (id: Long, title: String, severity: String, status: String, createdAt: String) -> Unit,
