@@ -24,11 +24,10 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.signalops.ui.utils.TimeUtils
-import androidx.compose.foundation.layout.Row
 
 @Composable
 fun IncidentsScreen(
-    onIncidentClick: (title: String, severity: String, status: String, createdAt: String) -> Unit,
+    onIncidentClick: (id: Long, title: String, severity: String, status: String, createdAt: String) -> Unit,
     onCreateIncident: () -> Unit,
     vm: IncidentViewModel = viewModel()
 ) {
@@ -121,6 +120,7 @@ fun IncidentsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         onClick = {
                             onIncidentClick(
+                                incident.id,
                                 incident.title,
                                 incident.severity,
                                 incident.status,
@@ -134,10 +134,8 @@ fun IncidentsScreen(
                                 style = MaterialTheme.typography.titleMedium
                             )
                             Spacer(Modifier.height(6.dp))
-                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                SeverityChip(incident.severity)
-                                StatusChip(incident.status)
-                            }
+                            Text("Severity: ${incident.severity}")
+                            Text("Status: ${incident.status}")
                             Text("Created: ${TimeUtils.formatTimestamp(incident.createdAt)}")
                         }
                     }

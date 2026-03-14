@@ -27,6 +27,7 @@ import com.example.signalops.ui.incidents.IncidentDetailScreen
 import com.example.signalops.ui.incidents.IncidentsScreen
 import com.example.signalops.ui.settings.SettingsScreen
 
+//To fix error with type mismatch and type inference
 private object MainRoutes {
     const val DASHBOARD = "dashboard"
     const val INCIDENTS = "incidents"
@@ -146,4 +147,3 @@ private fun MainNavGraph(
             )
         }
     }
-}
